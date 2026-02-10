@@ -9,7 +9,7 @@ public class Example7 {
 
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
 
-        var dbService = context.getBean(DBService.class);
+        context.getBean(DBService.class);
 
         context.close();
     }
