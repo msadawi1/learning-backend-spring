@@ -45,7 +45,8 @@ public class Example8 {
             context.registerBean("bmw", Vehicle.class, bmwSupplier);
         }
 
-        var car = context.getBean(Vehicle.class);
+        String beanName = (rand == 0) ? "audi" : "bmw";
+        var car = context.getBean(beanName, Vehicle.class);
 
         System.out.println("Random integer generated: " + rand);
         System.out.println("Car name: " + car.getName());
