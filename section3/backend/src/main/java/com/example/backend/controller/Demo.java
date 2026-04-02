@@ -1,17 +1,16 @@
 package com.example.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.Callable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Demo {
     @GetMapping("/hello")
-    public Callable<String> index() {
-        return () -> {
-            Thread.sleep(3000);
-            return "<h1>API Working</h1>";
-        };
+    public String get(@RequestHeader("User-Agent") String userAgent) {
+        return "GET: API Working. User-Agent: " + userAgent;
+    }
+
+    @PostMapping("/hello")
+    public String post(@RequestHeader("User-Agent") String userAgent, @RequestBody String body) {
+        return "POST: API Working. User-Agent: " + userAgent + ", body: " + body;
     }
 }
