@@ -36,4 +36,9 @@ public class Demo {
     public String update(@PathVariable Long userId) {
         return "Updating user with ID " + userId;
     }
+
+    @GetMapping("/search")
+    public String searchWithQueryParams(@RequestParam(required = false, name = "name", defaultValue = "guest") String userName, @RequestParam int age) {
+        return "Searching for user with name " + userName + " and age " + age;
+    }
 }
