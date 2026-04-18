@@ -8,6 +8,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -96,5 +97,30 @@ public class Demo {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header("Custom-Header", "Custom-Value")
                 .body(userDto);
+    }
+
+    @GetMapping({"", "/", "/v1"})
+    public String getUsersDefaultVersion() {
+        return "Getting users using API Default Version v1.0.0";
+    }
+
+    @GetMapping("/v2")
+    public String getUsersVersionV2() {
+        return "Getting users using API Version v2.0.0";
+    }
+
+    @GetMapping(params = "v=1")
+    public String getUsersQueryVersionV1() {
+        return "Getting users using Query Param API Version v1.0.0";
+    }
+
+    @GetMapping(params = "v=2")
+    public String getUsersQueryVersionV2() {
+        return "Getting users using Query Param API Version v2.0.0";
+    }
+
+    @GetMapping(headers = "x-api-version=2")
+    public String getUsersHeadersQueryVersionV2() {
+        return "Getting users using Header API Version v2.0.0";
     }
 }
