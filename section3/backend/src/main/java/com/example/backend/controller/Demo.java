@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -53,5 +54,10 @@ public class Demo {
         } else  {
             return "Language is not supported";
         }
+    }
+
+    @GetMapping("/headers/http-headers")
+    public String headers(@RequestHeader HttpHeaders headers) {
+        return headers.getFirst("User-Agent");
     }
 }
