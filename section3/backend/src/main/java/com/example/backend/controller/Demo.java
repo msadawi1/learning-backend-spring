@@ -1,5 +1,8 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.ApiResponseDto;
+import com.example.backend.dto.UserDto;
+import org.apache.catalina.User;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,5 +62,25 @@ public class Demo {
     @GetMapping("/headers/http-headers")
     public String headers(@RequestHeader HttpHeaders headers) {
         return headers.getFirst("User-Agent");
+    }
+
+    @PostMapping
+    public String createUser(@RequestBody UserDto userDto) {
+        System.out.println("Connecting to DB..");
+        System.out.println("Validating user input...");
+        System.out.println("Creating user...");
+        System.out.println("Created user " + userDto.toString());
+
+        return userDto.toString();
+    }
+
+    @PostMapping("/wrapper")
+    public ApiResponseDto<UserDto> createUserWithResponseWrapper(@RequestBody UserDto userDto) {
+        System.out.println("Connecting to DB..");
+        System.out.println("Validating user input...");
+        System.out.println("Creating user...");
+        System.out.println("Created user " + userDto.toString());
+
+        return new ApiResponseDto<UserDto>(true, userDto, null);
     }
 }
