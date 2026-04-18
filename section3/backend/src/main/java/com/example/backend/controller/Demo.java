@@ -4,6 +4,7 @@ import com.example.backend.dto.ApiResponseDto;
 import com.example.backend.dto.UserDto;
 import org.apache.catalina.User;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -82,5 +83,10 @@ public class Demo {
         System.out.println("Created user " + userDto.toString());
 
         return new ApiResponseDto<UserDto>(true, userDto, null);
+    }
+
+    @PostMapping("/request-entity")
+    public String createdUserWithRequestEntity(RequestEntity<UserDto> requestEntity) {
+        return "Request Headers: " +  requestEntity.getHeaders() + " and Request Body: " +  requestEntity.getBody();
     }
 }
