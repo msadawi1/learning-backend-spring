@@ -41,4 +41,17 @@ public class Demo {
     public String searchWithQueryParams(@RequestParam(required = false, name = "name", defaultValue = "guest") String userName, @RequestParam int age) {
         return "Searching for user with name " + userName + " and age " + age;
     }
+
+    @GetMapping("/headers")
+    public String headers(@RequestHeader("User-Agent")  String userAgent,
+                          @RequestHeader("User-Location") String userLocation,
+                          @RequestHeader(value = "User-Language", required = false, defaultValue = "ar") String userLanguage) {
+        if (userLanguage.equals("en")) {
+            return "User Agent: " +  userAgent + " and User Location: " + userLocation;
+        } else if (userLanguage.equals("ar")) {
+            return "وكيل المستخدم: " +  userAgent + " وموقع المستخدم " + userLocation;
+        } else  {
+            return "Language is not supported";
+        }
+    }
 }
