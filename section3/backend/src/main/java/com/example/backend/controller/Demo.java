@@ -2,9 +2,10 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.ApiResponseDto;
 import com.example.backend.dto.UserDto;
-import org.apache.catalina.User;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -88,5 +89,12 @@ public class Demo {
     @PostMapping("/request-entity")
     public String createdUserWithRequestEntity(RequestEntity<UserDto> requestEntity) {
         return "Request Headers: " +  requestEntity.getHeaders() + " and Request Body: " +  requestEntity.getBody();
+    }
+
+    @PostMapping("/response-entity/{id}")
+    public ResponseEntity<UserDto> createUserResponseEntity(@PathVariable Long id, @RequestBody UserDto userDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Custom-Header", "Custom-Value")
+                .body(userDto);
     }
 }
